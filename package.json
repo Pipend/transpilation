@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha test/index.ls --compilers ls:livescript",
     "coverage": "gulp coverage",
-    "coveralls": "istanbul cover _mocha -- test/index.ls --require should --compilers ls:livescript  && cat coverage/lcov.info | coveralls"
+    "coveralls": "gulp coverage  && cat coverage/lcov.info | coveralls"
   },
   "author": "",
   "license": "ISC",
