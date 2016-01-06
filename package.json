@@ -1,6 +1,6 @@
 {
   "name": "transpilation",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -35,5 +35,9 @@
     "mocha-lcov-reporter": "^1.0.0",
     "prelude-ls": "^1.1.2",
     "should": "^7.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pipend/transpilation"
   }
 }
