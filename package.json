@@ -1,0 +1,38 @@
+{
+  "name": "transpilation",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/index.ls --compilers ls:livescript",
+    "coverage": "gulp coverage",
+    "coveralls": "istanbul cover _mocha -- test/index.ls --require should --compilers ls:livescript  && cat coverage/lcov.info | coveralls"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.3.26",
+    "babel-core": "^6.3.26",
+    "babel-plugin-transform-es2015-arrow-functions": "^6.3.13",
+    "bluebird": "^3.1.1",
+    "livescript": "^1.4.0"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {},
+  "devDependencies": {
+    "browserify-shim": "^3.8.11",
+    "coveralls": "^2.11.4",
+    "gulp": "^3.9.0",
+    "gulp-livescript": "^3.0.0",
+    "gulp-livescript-istanbul": "0.0.1",
+    "gulp-mocha": "^2.2.0",
+    "istanbul": "^0.3.20",
+    "mocha": "^2.3.3",
+    "mocha-lcov-reporter": "^1.0.0",
+    "should": "^7.1.0"
+  }
+}
