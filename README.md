@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Pipend/transpilation.svg?branch=master)](https://travis-ci.org/Pipend/transpilation)
+[![Coverage Status](https://coveralls.io/repos/Pipend/transpilation/badge.svg?branch=master&service=github)](https://coveralls.io/github/Pipend/transpilation?branch=master)
+
 # Functions
 
 * `execute-javascript-sync :: JavascriptCode::String -> Context::object -> [Error, result]`

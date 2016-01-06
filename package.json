@@ -33,6 +33,7 @@
     "istanbul": "^0.3.20",
     "mocha": "^2.3.3",
     "mocha-lcov-reporter": "^1.0.0",
+    "prelude-ls": "^1.1.2",
     "should": "^7.1.0"
   }
 }
