@@ -4,12 +4,12 @@ require! \gulp-mocha
 {instrument, hook-require, write-reports} = (require \gulp-livescript-istanbul)!
 
 gulp.task \build, ->
-    gulp.src <[./*.ls]>
+    gulp.src <[index.ls]>
     .pipe gulp-livescript!
     .pipe gulp.dest './'
 
 gulp.task \watch, ->
-    gulp.watch <[./*.ls]>, <[build]>
+    gulp.watch <[./index.ls]>, <[build]>
 
 gulp.task \coverage, ->
     gulp.src <[./index.ls]>
