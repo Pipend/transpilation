@@ -1,6 +1,6 @@
 {
   "name": "transpilation",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,15 +16,8 @@
     "babel-plugin-transform-es2015-arrow-functions": "^6.3.13",
     "bluebird": "^3.1.1",
     "livescript": "^1.4.0"
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browserify-shim": {},
+  },  
   "devDependencies": {
-    "browserify-shim": "^3.8.11",
     "coveralls": "^2.11.4",
     "gulp": "^3.9.0",
     "gulp-livescript": "^3.0.0",
