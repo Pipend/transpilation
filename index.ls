@@ -42,7 +42,7 @@ export compile-and-execute-babel-sync = (code, context) -->
             .replace '"use strict";', '' .trim!
             .replace "'use strict';", '' .trim!
     catch err 
-        ["babel compilation error: #{err.to-string!}", null]
+        return ["babel compilation error: #{err.to-string!}", null]
 
     execute-javascript-sync javascript-code, context
 
@@ -51,7 +51,7 @@ export compile-and-execute-livescript-sync = (livescript-code, context) -->
     try 
         javascript-code = (compile livescript-code, {bare: true, header: false})
     catch err
-        ["livescript transpilation error: #{err.to-string!}", null]
+        return ["livescript transpilation error: #{err.to-string!}", null]
 
     execute-javascript-sync javascript-code, context
 

@@ -31,19 +31,38 @@ describe \transpilation, ->
         p.then (result) ->
             if result != 2 then Promise.reject "result must be 2 instead of #{result}" else null
 
+    # returns-error-sync :: [Error, a] -> p String?
+    returns-error-sync = ([err, result]) ->
+        if !!err
+            Promise.resolve null
+        else
+            Promise.reject "must throw err, instead returned result = #{result}"
+
     javascript = "a + 1"
+    bad-javascript = "a + "
     babel = "addOne = (n) => {return n + 1}; addOne(a)"
+    bad-babel = "addOne = (n) => {return n + 1; addOne(a)"
     livescript = "(+ 1) a"
+    bad-livescript = "+ 1) a"
     context = a: 1
 
     specify \execute-javascript-sync, ->
         validate-sync (execute-javascript-sync javascript, context)
 
+    specify 'execute-javascript-sync must return err', ->
+        returns-error-sync (execute-javascript-sync bad-javascript, context)
+
     specify \compile-and-execute-babel-sync, ->
         validate-sync (compile-and-execute-babel-sync babel, context)
 
+    specify 'compile-and-execute-babel-sync must return err', ->
+        returns-error-sync (compile-and-execute-babel-sync bad-babel, context)
+
     specify \compile-and-execute-livescript-sync, ->
         validate-sync (compile-and-execute-livescript-sync livescript, context)
+
+    specify 'compile-and-execute-livescript-sync must return err', ->
+        returns-error-sync (compile-and-execute-livescript-sync bad-livescript, context)
 
     specify \compile-and-execute-sync, ->
         validate-sync (compile-and-execute-sync livescript, \livescript, context)
