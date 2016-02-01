@@ -46,7 +46,7 @@ export compile-and-execute-babel-sync = (code, context) -->
 
     execute-javascript-sync javascript-code, context
 
-# compile-and-execute-livescript :: String -> object -> [Error, a]
+# compile-and-execute-livescript-sync :: String -> object -> [Error, a]
 export compile-and-execute-livescript-sync = (livescript-code, context) -->
     try 
         javascript-code = (compile livescript-code, {bare: true, header: false})
@@ -58,7 +58,7 @@ export compile-and-execute-livescript-sync = (livescript-code, context) -->
 # compile-and-execute-sync :: String -> String -> object -> [Error, a]
 export compile-and-execute-sync = (code, language, context) ->
     # select the compiler based on the language
-    export (switch language
+    (switch language
         | \livescript => compile-and-execute-livescript-sync
         | \javascript => execute-javascript-sync
         | \babel => compile-and-execute-babel-sync) do 
@@ -74,14 +74,14 @@ export from-error-value-tuple = (f) ->
             [err, result] = f.apply context, args
             if !!err then rej err else res result
 
-# execute-javascript :: String -> object -> p a
+# execute-javascript :: String, object -> p a
 export execute-javascript = from-error-value-tuple execute-javascript-sync
 
-# compile-and-execute-babel :: String -> object -> p a
+# compile-and-execute-babel :: String, object -> p a
 export compile-and-execute-babel = from-error-value-tuple compile-and-execute-babel-sync
 
-# compile-and-execute-livescript :: String -> object -> p a
+# compile-and-execute-livescript :: String, object -> p a
 export compile-and-execute-livescript = from-error-value-tuple compile-and-execute-livescript-sync
 
-# compile-and-execute :: String -> String -> object -> p a
+# compile-and-execute :: String, String, object -> p a
 export compile-and-execute = from-error-value-tuple compile-and-execute-sync
