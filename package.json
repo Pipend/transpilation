@@ -1,6 +1,6 @@
 {
   "name": "transpilation",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A library for compiling from different (to-js) langauges to javascript",
   "main": "index.js",
   "scripts": {
