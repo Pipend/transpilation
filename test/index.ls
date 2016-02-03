@@ -15,21 +15,24 @@ Promise = require \bluebird
 
 describe \transpilation, ->
 
-    # validate-sync :: [err, result] -> p String?
-    validate-sync = ([err, result]) ->
+    # validate-sync :: [err, result] -> a -> p String?
+    validate-sync = ([err, result], expected-result = 2) ->
         if !!err
             Promise.reject err
 
-        else if result != 2
-            Promise.reject "result must be 2 instead of #{result}"
+        else if result != expected-result
+            Promise.reject "result must be #{expected-result} instead of #{result}"
 
         else 
             Promise.resolve null
 
-    # validate :: p result -> p String?
-    validate = (p) ->
+    # validate :: p result -> a -> p String?
+    validate = (p, expected-result = 2) ->
         p.then (result) ->
-            if result != 2 then Promise.reject "result must be 2 instead of #{result}" else null
+            if result != expected-result 
+                Promise.reject "result must be #{expected-result} instead of #{result}" 
+            else 
+                null
 
     # returns-error-sync :: [Error, a] -> p String?
     returns-error-sync = ([err, result]) ->
@@ -40,7 +43,14 @@ describe \transpilation, ->
 
     javascript = "a + 1"
     bad-javascript = "a + "
-    babel = "addOne = (n) => {return n + 1}; addOne(a)"
+    babel = """
+    let factorial = (n, acc = 1) => {
+      if (n <= 1) return acc;
+      return factorial(n - 1, n * acc);
+    }
+
+    factorial(10)
+    """
     bad-babel = "addOne = (n) => {return n + 1; addOne(a)"
     livescript = "(+ 1) a"
     bad-livescript = "+ 1) a"
@@ -53,7 +63,7 @@ describe \transpilation, ->
         returns-error-sync (execute-javascript-sync bad-javascript, context)
 
     specify \compile-and-execute-babel-sync, ->
-        validate-sync (compile-and-execute-babel-sync babel, context)
+        validate-sync (compile-and-execute-babel-sync babel, context), 3628800
 
     specify 'compile-and-execute-babel-sync must return err', ->
         returns-error-sync (compile-and-execute-babel-sync bad-babel, context)
@@ -77,7 +87,7 @@ describe \transpilation, ->
         validate (execute-javascript javascript, context)
 
     specify \compile-and-execute-babel, ->
-        validate (compile-and-execute-babel babel, context)
+        validate (compile-and-execute-babel babel, context), 3628800
 
     specify \compile-and-execute-livescript, ->
         validate (compile-and-execute-livescript livescript, context)

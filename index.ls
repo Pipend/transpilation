@@ -1,5 +1,5 @@
 Promise = require \bluebird
-require! \babel-core
+require! \babel-standalone
 {compile} = require \livescript
 {foldr1, keys, map} = require \prelude-ls
 require! \vm
@@ -38,7 +38,7 @@ export execute-javascript-sync = (code, context) -->
 # compile-and-execute-javascript :: String -> object -> [Error, a]
 export compile-and-execute-babel-sync = (code, context) -->
     try 
-        javascript-code = (babel-core.transform code, {plugins: ["transform-es2015-arrow-functions"]}) .code
+        javascript-code = (babel-standalone.transform code, {presets: ["es2015", "react"]}) .code
             .replace '"use strict";', '' .trim!
             .replace "'use strict';", '' .trim!
     catch err 
