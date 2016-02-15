@@ -1,6 +1,6 @@
 Promise = require \bluebird
 require! \babel-standalone
-{compile} = require \livescript
+{compile} = require \livescript-standalone
 {foldr1, keys, map} = require \prelude-ls
 require! \vm
 
