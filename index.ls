@@ -1,8 +1,6 @@
-Promise = require \bluebird
 require! \babel-standalone
 {compile} = require \livescript-standalone
 {foldr1, keys, map} = require \prelude-ls
-require! \vm
 
 # execute-javascript :: String -> object -> [Error, a]
 export execute-javascript-sync = (code, context) -->
@@ -28,7 +26,7 @@ export execute-javascript-sync = (code, context) -->
             else
 
                 # use vm module for nodejs
-                vm.run-in-new-context code, context
+                (require \vm).run-in-new-context code, context
 
         [null, result]
 

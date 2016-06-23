@@ -1,5 +1,4 @@
 assert = require \assert
-Promise = require \bluebird
 {keys} = require \prelude-ls
 {
     execute-javascript-sync
