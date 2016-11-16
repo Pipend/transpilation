@@ -36,7 +36,7 @@ export execute-javascript-sync = (code, context) -->
 # compile-and-execute-javascript :: String -> object -> [Error, a]
 export compile-and-execute-babel-sync = (code, context) -->
     try 
-        javascript-code = (babel-standalone.transform code, {presets: ["es2015", "react"]}) .code
+        javascript-code = (babel-standalone.transform code, {presets: ["es2015", "react"], compact: false, minified: false}) .code
             .replace '"use strict";', '' .trim!
             .replace "'use strict';", '' .trim!
     catch err 
